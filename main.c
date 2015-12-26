@@ -1,12 +1,11 @@
-#include <stdio.h>
 #include "eval.h"
 
 int main(){
 
-	char sample[] = "9+9";
-	printf("%d",eval(sample));
-
-	
+	int result;
+	char sample[] = "10-3-4";
+	result = eval(sample);
+	printf("result %d", result);
 
 	return 0;
 }

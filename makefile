@@ -1,16 +1,17 @@
-CC=cc
+CC=gcc
 CFLAGS=-Wall -g
-DEPS=eval.h
 OBJ=eval.o
+DEPS=eval.h
 
-%.o: %.c $(DEPS)
-	$(CC) $< $(CFLAGS) -c -o $@ 
+%.o: %.c (DEPS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 main: main.c $(OBJ)
-	cc $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 .PHONY: clean
 
 clean:
-	rm -f *.o main
+	rm *.o main
+
 

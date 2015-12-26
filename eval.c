@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "eval.h"
 
 int eval(char *expression){
@@ -8,8 +7,7 @@ int eval(char *expression){
 	str = expression;
 	//str = leftTrim(rightTrim(expression));
 
-	position = instr(str, '+');
-
+	position = instrrev(str, '-', 4);
 
 	if(position){
 
@@ -17,7 +15,7 @@ int eval(char *expression){
 		part1 = str;
 		part2 = str + (position + 1);
 
-		return eval(part1) + eval(part2);
+		return eval(part1) - eval(part2);
 
 	}else{
 
@@ -49,12 +47,12 @@ char *rightTrim(char *str){
 	return str;
 }
 
-int instr(char *str, char operator){
+int instr(char *str, operator search, int start){
 
 	char *buffer = str;
-	int i=0;
+	int i=start;
 	int fl = 0;
-
+	buffer = buffer + i;
 	while(*buffer != '\0' ){
 
 		if(*buffer == operator){
@@ -66,9 +64,24 @@ int instr(char *str, char operator){
 		buffer++;
 	}
 
-	if(fl)
-		return i;
-	else
-		return 0;
+	return (((fl)?i:0));
+}
+
+int instrrev(char *str, char operator, int limit){
+
+	int p, n;
+	p = n = 0;
+
+	do{
+
+		p = instr(str, operator, p+1);
+		p *= (p <= limit);
+		if(p>0)
+			n=p;
+
+	}while(p);
+
+	return n;
+
 }
 
